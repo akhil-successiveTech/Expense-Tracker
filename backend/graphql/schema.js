@@ -1,4 +1,4 @@
-export const typeDefs = /* GraphQL */ `
+export const typeDefs = `#graphql
   type Category {
     id: ID!
     name: String!
@@ -16,5 +16,9 @@ export const typeDefs = /* GraphQL */ `
 
   type Subscription {
     expenseCreated(userId: ID!): Expense!
+  }
+
+  type Query {
+    _empty: String
   }
 `;

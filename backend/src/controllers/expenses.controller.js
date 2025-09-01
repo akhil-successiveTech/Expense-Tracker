@@ -1,6 +1,6 @@
 import Expense from "../models/Expense.js";
 import Category from "../models/Category.js";
-import { pubsub, EVENTS } from "../graphql/resolvers.js";
+import { pubsub, EVENTS } from "../../graphql/resolvers.js";
 
 export const listExpenses = async (req, res) => {
   const { from, to, categoryId } = req.query;
