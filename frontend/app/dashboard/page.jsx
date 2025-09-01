@@ -4,6 +4,7 @@ import api from "@/utils/api";
 import ExpenseList from "@/components/ExpenseList";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import styles from "./Dashboard.module.css";
+import { getToken } from "@/utils/auth";
 
 export default function Dashboard() {
   const [expenses, setExpenses] = useState([]);
@@ -15,6 +16,9 @@ export default function Dashboard() {
     setLoading(true);
     setError(null);
     try {
+      console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
+      console.log("Token being sent:", getToken());
+
       const expRes = await api.get("/api/expenses");
       const allExpenses = Array.isArray(expRes.data)
         ? expRes.data

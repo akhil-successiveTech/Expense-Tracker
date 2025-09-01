@@ -74,3 +74,37 @@
   text-align: center; /* Center the error message */
   margin-top: 1rem; /* Space above the error message */
 }
+
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem; /* space between icon and text */
+  background: #db4437; /* Google red */
+  color: #ffffff;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 9999px; /* pill shape */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%; /* full width */
+  margin-top: 1rem; /* spacing below form */
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.googleButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(219, 68, 55, 0.6); /* Google red glow */
+  background: #c1351d; /* darker red */
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
+  background: url("https://www.svgrepo.com/show/475656/google-color.svg")
+    no-repeat center center;
+  background-size: contain;
+}
+

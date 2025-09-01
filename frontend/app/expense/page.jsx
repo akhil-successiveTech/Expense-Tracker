@@ -35,17 +35,43 @@ export default function Expenses() {
   };
 
   const addExpense = async () => {
-    if (!amount || !categoryId) return alert("Please enter amount and select category");
-    try {
-      await api.post("/api/expenses", { amount, note, categoryId });
-      setAmount("");
-      setNote("");
-      setCategoryId("");
-      fetchExpenses();
-    } catch (err) {
-      console.error("Add error:", err);
+  if (!amount || !categoryId) return alert("Please enter amount and select category");
+
+  const expenseAmount = parseFloat(amount);
+
+  try {
+    // 1. Get selected category details (with limit)
+    const category = categories.find((cat) => cat._id === categoryId);
+    const categoryLimit = category?.limit || Infinity;
+
+    // 2. Calculate current total for this category
+    const res = await api.get("/api/expenses");
+    const categoryExpenses = res.data.items.filter(
+      (exp) => exp.category?._id === categoryId
+    );
+    const currentTotal = categoryExpenses.reduce((sum, exp) => sum + exp.amount, 0);
+
+    // 3. Check if adding this expense exceeds limit
+    if (currentTotal + expenseAmount > categoryLimit) {
+      alert(
+        `⚠️ Warning: Adding this will exceed the limit (${categoryLimit}) for category "${category.name}".`
+      );
     }
-  };
+
+    // 4. Add expense anyway
+    await api.post("/api/expenses", { amount: expenseAmount, note, categoryId });
+
+    // reset inputs
+    setAmount("");
+    setNote("");
+    setCategoryId("");
+    fetchExpenses();
+  } catch (err) {
+    console.error("Add error:", err);
+    alert("Failed to add expense!");
+  }
+};
+
 
   return (
     <div className={styles.container}>

@@ -1,15 +1,23 @@
 "use client";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { removeToken } from "@/utils/auth";
+import { useEffect, useState } from "react";
+import { getToken, removeToken } from "@/utils/auth";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = getToken();
+    setIsLoggedIn(!!token);
+  }, [pathname]);
 
   const handleLogout = () => {
     removeToken();
+    setIsLoggedIn(false);
     router.push("/");
   };
 
@@ -41,12 +49,26 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <button onClick={handleLogout} className={styles.logoutBtn}>
-            Logout
-          </button>
-          <button className={styles.logoutBtn} onClick={() => router.push("/signup")}>
-            SignUp
-          </button>
+          {isLoggedIn ? (
+            <button onClick={handleLogout} className={styles.logoutBtn}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <button
+                className={styles.logoutBtn}
+                onClick={() => router.push("/")}
+              >
+                Login
+              </button>
+              <button
+                className={styles.logoutBtn}
+                onClick={() => router.push("/signup")}
+              >
+                SignUp
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

@@ -55,8 +55,7 @@ export default function Login() {
           </button>
         </form>
         {error && <p className={styles.errorMessage}>{error}</p>}
-      </div>
-      <button
+        <button
         className={styles.googleButton}
         onClick={() =>
           (window.location.href = "http://localhost:4000/api/auth/google")
@@ -64,6 +63,7 @@ export default function Login() {
       >
         Login with Google
       </button>
+      </div>
     </div>
   );
 }

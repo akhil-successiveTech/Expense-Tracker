@@ -73,29 +73,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  background-color: #eef3fd; /* lighter Google Blue background */
-  color: #1a73e8; /* darker blue text */
-  padding: 0.5rem 1rem;
+  gap: 0.6rem;
+  background: #db4437; /* Google red */
+  color: #ffffff;
+  padding: 0.6rem;
   border: none;
-  border-radius: 0.5rem;
-  font-weight: 500;
+  border-radius: 9999px; /* pill shape */
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%; /* same as login button */
+  margin-top: 1rem; /* spacing below login button */
   font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .googleButton:hover {
-  background-color: #dbe6fb;
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);
-}
-
-.googleButton::before {
-  content: "";
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  background: url("https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg") no-repeat center;
-  background-size: contain;
+  box-shadow: 0 4px 20px rgba(219, 68, 55, 0.6); /* glow */
+  background: #c1351d; /* darker red */
 }
